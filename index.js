@@ -93,8 +93,11 @@ async function deleteOlderReleases(keepLatest) {
       `💬  found total of ${activeMatchedReleases.length}${matchingLoggingAddition} active release(s)`
     );
     releaseIdsAndTags = activeMatchedReleases
-      .map(({ id, tag_name: tagName }) => ({ id, tagName }))
+      .map(({ id, tag_name: tagName, name, prerelease }) => ({ id, tagName, name, prerelease }))
       .slice(keepLatest);
+
+    console.log("To delete:")
+    console.log(releaseIdsAndTags)
   } catch (error) {
     console.error(`🌶  failed to get list of releases <- ${error.message}`);
     console.error(`exiting...`);
